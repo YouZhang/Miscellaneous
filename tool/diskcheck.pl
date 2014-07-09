@@ -1,14 +1,15 @@
 use strict;
 
 my $cwd = 'F:\bvm\EXE';
-my $webmaster = 'Renbo.Jiang@amd.com;you.zhang@amd.com';
+my $webmaster = 'Renbo.Jiang@amd.com;You.Zhang@amd.com';
+my $attachedLogFile = 'F:\clean-guide\cleanLog.txt';
 
 main(); 
 
 sub getDiskStatus
 {
     my $disk = shift;
-    my $command = "rcmd LogicalDisk where \"Caption='";
+    my $command = "wmic LogicalDisk where \"Caption='";
     $command .= $disk;
     $command .= "'\" get FreeSpace,Size /value ";  
     
@@ -38,7 +39,8 @@ sub sendMail
 	$Email_command .= " -t $webmaster";
 	$Email_command .= " -u \"BIOS Vending Machine: Server Disk Check\" ";
 	my $failed;
-
+	#attched log file
+	$Email_command .= " -a \"".$attachedLogFile."\"";
 	# email body
 	$Email_command .= " -m \"".$message."\""; 
  

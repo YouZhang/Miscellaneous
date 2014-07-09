@@ -24,21 +24,21 @@ my $backupDir = "G:\\BVM_BIN_BACK_UP_$today";
 
 Main();
 sub Main{
-    appendLog("#---------$today Temp cleand Start-------------#");
+    appendLog("#---------$today Temp cleaning Start-------------#");
     delTemp();
-    appendLog("#---------$today Temp cleand End-------------#");
+    appendLog("#---------$today Temp cleaning End-------------#");
     #------------------------------------------------------------------------
-    appendLog("#---------$today REPO cleand Start-------------#");
+    appendLog("#---------$today REPO cleaning Start-------------#");
     delREPO();
-    appendLog("#---------$today REPO cleand end-------------#");
+    appendLog("#---------$today REPO cleaning end-------------#");
     #------------------------------------------------------------------------
-    appendLog("#---------$today UserBIOS cleand Start-------------#");
+    appendLog("#---------$today UserBIOS cleaning Start-------------#");
     delUserBIOS();
-    appendLog("#---------$today UserBIOS cleand End-------------#");
+    appendLog("#---------$today UserBIOS cleaning End-------------#");
     #------------------------------------------------------------------------
-    appendLog("#---------$today BVMBIOS cleand Start-------------#");
+    appendLog("#---------$today BVMBIOS cleaning Start-------------#");
     del_BakBVMBIOS();
-    appendLog("#---------$today BVMBIOS cleand End-------------#");
+    appendLog("#---------$today BVMBIOS cleaning End-------------#");
 }
 
 
