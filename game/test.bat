@@ -1,0 +1,1 @@
+python C:\Users\youzhang\Documents\GitHub\Miscellaneous\game\2048.py
