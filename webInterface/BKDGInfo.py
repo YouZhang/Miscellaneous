@@ -84,6 +84,7 @@ class BKDGPage(object):
 
 if __name__ == "__main__":
     message = ''
+	trigger = 0
     lastUpdateDate = getLastVersion()
     myBKDGPage = BKDGPage('init')
     content = myBKDGPage.getPage()
@@ -91,10 +92,13 @@ if __name__ == "__main__":
         myBKDGPage = BKDGPage(program)
         presentUpdatedDate = myBKDGPage.getBKDGState(content)
         isUpdated = myBKDGPage.compareVersion(presentUpdatedDate,lastUpdateDate)
+		if( isUpdated == '1'):
+			trigger = 1
         myBKDGPage.writeUpdateState(program,presentUpdatedDate)
-        message = message + program + " : " + presentUpdatedDate + " : " + isUpdated + "\t"
-    status = sendMail(message)
-    print status
+        message = message + program + " : " + presentUpdatedDate + " : " + isUpdated + "\t"		
+	if( trigger ):
+		status = sendMail(message)
+		print status
 
 
 
