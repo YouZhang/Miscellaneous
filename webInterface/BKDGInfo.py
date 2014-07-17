@@ -5,7 +5,7 @@ import re
 import os
 
 
-emailToolPath = "C:\\Users\\youzhang\\Documents\\GitHub\\Miscellaneous\\tool\\sendEmail.exe"
+emailTool = "sendEmail.exe"
 
 programUpdateState = {
     "KV":0,
@@ -24,8 +24,8 @@ def traceLog(info,isDebug):
         print info
 
 def sendMail(message):
-    command = emailToolPath + " -s aussmtp.amd.com -f BVM_SYSTEM_SERVICE@amd.com"
-    command += " -t you.zhang@amd.com"
+    command = emailTool + " -s aussmtp.amd.com -f BKDG_Update@amd.com"
+    command += " -t you.zhang@amd.com;Renbo.Jiang@amd.com"
     command += " -u \"BKDG update Info\" "
     command += " -m \"{0}\"".format(message)
     status = os.system(command)
@@ -84,21 +84,21 @@ class BKDGPage(object):
 
 if __name__ == "__main__":
     message = ''
-	trigger = 0
     lastUpdateDate = getLastVersion()
+    trigger = 0
     myBKDGPage = BKDGPage('init')
     content = myBKDGPage.getPage()
     for program in programUpdateState.keys():
         myBKDGPage = BKDGPage(program)
         presentUpdatedDate = myBKDGPage.getBKDGState(content)
         isUpdated = myBKDGPage.compareVersion(presentUpdatedDate,lastUpdateDate)
-		if( isUpdated == '1'):
-			trigger = 1
+        if( isUpdated == '1' ):
+            trigger = 1
         myBKDGPage.writeUpdateState(program,presentUpdatedDate)
-        message = message + program + " : " + presentUpdatedDate + " : " + isUpdated + "\t"		
-	if( trigger ):
-		status = sendMail(message)
-		print status
-
-
-
+        message = message + program + " : " + presentUpdatedDate + " : " + isUpdated + "\t"
+    if( trigger ):
+        status = sendMail(message)
+        print message
+        print status
+    else:
+        print "no BKDG update found"
